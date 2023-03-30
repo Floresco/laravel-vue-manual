@@ -1,4 +1,5 @@
 import { defineConfig } from "vite";
+import {fileURLToPath} from "url";
 import vue from "@vitejs/plugin-vue";
 
 export default ({ mode }) => {
@@ -13,8 +14,13 @@ export default ({ mode }) => {
             // the built files will be added here
             outDir: "./../public/app",
         },
-        // also going to change base base on mode
+        // also going to change base on mode
         base: isDevelopment ? "/" : "/app/",
         plugins: [vue()],
+        resolve: {
+            alias: {
+                '@': fileURLToPath(new URL('./src', import.meta.url)),
+            },
+        },
     });
 };
